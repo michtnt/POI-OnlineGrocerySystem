@@ -115,6 +115,7 @@
                 <div id="shopping-cart"></div>
                 <button onClick="clearAllCart()">Clear All</button>
                 <button onCLick="checkout()">Checkout</button>
+                <div id="shopping"></div>
             </div>
         </div>
         <script>
@@ -137,6 +138,7 @@
                 document.getElementById("shopping-cart").innerHTML += document.getElementById("product_details").innerHTML
                 document.getElementById("shopping-cart").innerHTML += "<button onCLick='clearItemCart(currentProduct)'>Clear</button>"
                 totalCart.push(currentProduct)
+                // TODO check item by quantity instead of > 0 
             }
             
             // TODO
@@ -146,18 +148,33 @@
             
             function clearAllCart(){
                 document.getElementById("shopping-cart").innerHTML = "";
+                totalCart = [];
             }
             
             function checkout(){
-              let xhttp = new XMLHttpRequest();
-              xhttp.onreadystatechange = function() {
-                if (xhttp.readyState == 4 && xhttp.status == 200) {
-            // 	 	document.getElementById("product_details").innerHTML = xhttp.responseText
+                let xhttp = new XMLHttpRequest();
+                if (totalCart.length == 0){
+                  alert("There is nothing in shopping cart!")
+                } else {
+                  let xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function() {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        let result = JSON.parse(xhttp.responseText);
+                        for (const [key, value] of Object.entries(result)) {
+                          console.log(`${key}: ${value}`);
+                          if(!value){
+                              alert(`item with ID ${key} is not in stock!`)
+                              return false;
+                          }
+                        }
+                        // if all good
+                        location.href = "checkout.html";
+                    }
                 }
+                  xhttp.open("POST", "checkProduct.php");
+                  xhttp.setRequestHeader( "Content-Type", "application/json" );
+                  xhttp.send(JSON.stringify(totalCart));
               };
-              xhttp.open("POST", "checkProduct.php");
-              xhttp.setRequestHeader( "Content-Type", "application/json" );
-              xhttp.send(totalCart);
             }
         </script>
     </body>
