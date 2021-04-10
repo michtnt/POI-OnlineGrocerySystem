@@ -1,5 +1,8 @@
-1. save cart data in session? for checkout page
-2. // TODO validate against total item bought not 0
-3. clear one item
-4. css better
-5. fix minor bugs
+2. validate against total item bought not 0 [CHECK]
+4. css better  [CHECK]
+5. fix minor bugs [CHECK]
+
+update subtotal and total when quantity change
+fix checkproduct.php
+
+ php -S 0.0.0.0:8080

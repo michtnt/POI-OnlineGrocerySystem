@@ -1,39 +1,62 @@
-body {
-  font-family: 'Roboto Mono', monospace;
-  background-color: #adadad;
+/*Frame Division*/
+.left-hand { grid-area: main; }
+.top-right { grid-area: topRight; }
+.bottom-right { grid-area: bottomRight; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+    'main main main topRight topRight topRight'
+    'main main main bottomRight bottomRight bottomRight';
+  grid-gap: 10px;
+  background-color: #83c5be;
+  padding: 10px;
 }
+
+.grid-container > div {
+  background-color: #83c5be;
+  text-align: center;
+  /*padding: 20px 0;*/
+}
+
+/*Dropdown*/
+body {
+  font-family: 'Arial', monospace;
+  background-color: #83c5be;
+}
+
 .navbar {
   height: 46px;
-  background-color: #1b1b1b;
+  background-color: #006d77;
 }
 
 .navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
 
 .dropdown {
-    float: left;
-    position: relative;
+  float: left;
+  position: relative;
 }
 
 .dropdown .dropbtn {
-    font-size: 16px;    
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
+  font-size: 16px;    
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: red;
+    background-color: #fcbf49;
 }
 
 .dropdown-one {
@@ -61,14 +84,14 @@ body {
 }
 
 .dropdown-one .dItem {
-    color: black;
-    padding: 12px 16px;
-    display: block;
-    text-align: left;
+  color: black;
+  padding: 12px 16px;
+  display: block;
+  text-align: left;
 }
 
 .dropdown-one .dItem:hover, .dropdown-two a:hover {
-    background-color: #ddd;
+  background-color: #f2cc8f;
 }
 
 .container {
@@ -77,3 +100,26 @@ body {
   background-color: white;
   margin: 10px auto 0 auto;
 }
+
+.product-details-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.product-details-space {
+  margin-top: 50px
+}
+
+.shopping-cart-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+

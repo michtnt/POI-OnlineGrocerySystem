@@ -1,9 +1,9 @@
 <?php
 
- //create a connection to the database 
+//create a connection to the database 
 $connection = mysqli_connect('localhost', 'uts', 'internet', 'assignment1');
+// get specific product based on the code
 $query_string = "select * from products where product_id = ".$_GET["code"];
-
 //run the query and assign the return values to $result
 $result = mysqli_query($connection, $query_string);
 
@@ -14,15 +14,35 @@ $num_rows = mysqli_num_rows($result);
 if ($num_rows > 0 ) {
  	//add while loop to fetch the values using mysqli_fetch_assoc
   while( $a_row = mysqli_fetch_assoc($result) ){
-     $product="<p>Name: ".$a_row[product_name]."</p>";
-     $product=$product."\n"."<p>Price: ".$a_row[unit_price]."</p>";
-     $product=$product."\n"."<p>Type: ".$a_row[unit_quantity]."</p>";
-     $product=$product."\n"."<p>Stock:".$a_row[in_stock]."</p>";
+     $product="
+     <table style='justify-content:center;'>
+      <tr>
+        <td>Product ID</td>
+        <td>$a_row[product_id]</td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>$a_row[product_name]</td>
+      </tr
+      <tr>
+        <td>Price</td>
+        <td id='product-unit-price'>$a_row[unit_price]</td>
+      </tr>
+      <tr>
+        <td>Quantity</td>
+        <td>$a_row[unit_quantity]</td>
+      </tr>
+      <tr>
+        <td>Stock</td>
+        <td>$a_row[in_stock]</td>
+      </tr>
+     </table>
+     ";
   }
 }
 
 //close the connection
 mysqli_close($connection);
-echo json_encode($product);
+echo $product;
 
 ?>
