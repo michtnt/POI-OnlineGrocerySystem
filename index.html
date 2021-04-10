@@ -178,10 +178,17 @@
                             // add the value
                             let prevQuantity = document.getElementById(`quantity-${currentProduct}`).value
                             document.getElementById(`quantity-${currentProduct}`).value = parseInt(document.getElementById(`quantity-${currentProduct}`).value) + parseInt(productQuantity)
+                            // https://www.reddit.com/r/javascript/comments/180g2a/innerhtml_not_being_updated_after_changing_value/
+                            document.getElementById(`quantity-${currentProduct}`).setAttribute('value', document.getElementById(`quantity-${currentProduct}`).value)
                             // replace old subtotal
                             document.getElementById(`subtotal-${currentProduct}`).innerHTML = ((parseInt(prevQuantity) * parseFloat(document.getElementById(`product-unit-price-${currentProduct}`).innerHTML)) + parseFloat(subtotal)).toFixed(2);
                             // find current product and replace the object in  shopping cart
-                            totalCart.currentProduct = parseInt(document.getElementById(`quantity-${currentProduct}`).value)
+                            for(let i=0; i < totalCart.length; i++){
+                                let key = Object.keys(totalCart[i])[0]
+                                if(key == currentProduct){
+                                    totalCart[i][currentProduct] = parseInt(document.getElementById(`quantity-${currentProduct}`).value)
+                                }
+                            }
                         }
                         
                         // display total
@@ -221,12 +228,18 @@
                         if(t) {
                           let currentId = t.id.split("-")
                           document.getElementById(`subtotal-${currentId[1]}`).innerHTML = (val * parseFloat(document.getElementById(`product-unit-price-${currentId[1]}`).innerHTML)).toFixed(2);
+                           // find current product and replace the object in  shopping cart
+                            for(let i=0; i < totalCart.length; i++){
+                                let key = Object.keys(totalCart[i])[0]
+                                if(key == currentProduct){
+                                    totalCart[i][currentProduct] = parseInt(val);
+                                }
+                            }
                         }
                         
                         let total = 0;
                         for(let i=0; i < totalCart.length; i++){
                             let key = Object.keys(totalCart[i])[0]
-                            console.log("key", key)
                             total += parseFloat(document.getElementById(`subtotal-${key}`).innerHTML)
                         }
                         
@@ -237,6 +250,7 @@
 
                 function checkout(){
                     let xhttp = new XMLHttpRequest();
+                    console.log("totalCart", totalCart)
                     // if there is nothing in cart
                     if (totalCart.length == 0){
                       alert("There is nothing in shopping cart!")
@@ -244,22 +258,24 @@
                       let xhttp = new XMLHttpRequest();
                       xhttp.onreadystatechange = function() {
                         if (xhttp.readyState == 4 && xhttp.status == 200) {
-                            let result = JSON.parse(xhttp.responseText);
-                            for (const [key, value] of Object.entries(result)) {
-                              console.log(`${key}: ${value}`);
-                              // alert user if ran out of stock
-                              if(!value){
-                                  alert(`item with ID ${key} is not in stock!`)
-                                  return false;
-                              }
-                            }
+                            console.log(xhttp.responseText)
+                            // console.log(JSON.parse(xhttp.responseText))
+                            // let result = JSON.parse(xhttp.responseText);
+                            // for (const [key, value] of Object.entries(result)) {
+                            //   console.log(`${key}: ${value}`);
+                            //   // alert user if ran out of stock
+                            //   if(!value){
+                            //       alert(`item with ID ${key} is not in stock!`)
+                            //       return false;
+                            //   }
+                            // }
                             // there is stocks: direct to checkout.html
-                            location.href = "checkout.html";
+                            // location.href = "checkout.html";
                         }
                     }
                       xhttp.open("POST", "checkProduct.php");
                       xhttp.setRequestHeader( "Content-Type", "application/json" );
-                      xhttp.send(JSON.stringify(totalCart));
+                      xhttp.send(JSON.stringify(totalCart)); 
                   };
                 }
             </script>
