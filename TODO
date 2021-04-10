@@ -1,8 +1,11 @@
 2. validate against total item bought not 0 [CHECK]
 4. css better  [CHECK]
 5. fix minor bugs [CHECK]
+update subtotal and total when quantity change [CHECK]
 
-update subtotal and total when quantity change
-fix checkproduct.php
+fix checkproduct.php [Today]
+Checkout [Today]
+
+fix bug adding products 2x
 
  php -S 0.0.0.0:8080

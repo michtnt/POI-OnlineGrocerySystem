@@ -26,7 +26,7 @@ if ($num_rows > 0 ) {
       </tr
       <tr>
         <td>Price</td>
-        <td id='product-unit-price'>$a_row[unit_price]</td>
+        <td id='product-unit-price-$a_row[product_id]'>$a_row[unit_price]</td>
       </tr>
       <tr>
         <td>Quantity</td>
