@@ -134,6 +134,7 @@
                 <button onClick="clearAllCart()">Clear All</button>
                 <button onCLick="checkout()">Checkout</button>
                 <div id="shopping"></div>
+                <div id="checkout"></div>
             </div>
             <script>
                 var currentProduct;
@@ -150,7 +151,7 @@
                 	 	// remove prompt
                 	 	document.getElementById("product-details-notice").innerHTML = ""
                 	 	// allow user to add product's quantity
-                	 	document.getElementById("product-quantity").innerHTML = "<input type='number' id='quantity' style='width: 60px;'>"
+                	 	document.getElementById("product-quantity").innerHTML = "<input type='number' id='quantity' style='width: 60px;' min='0'>"
                 	 	// allow user to add products to shopping cart
                 	 	document.getElementById("add-button").innerHTML = "<button onclick='addCart()'>Add</button>"
                     }
@@ -171,7 +172,7 @@
                         if(!inCart){
                             // put product details to shopping cart
                             // allow user to edit product's quantity
-                            document.getElementById("shopping-cart").innerHTML += "<div class='shopping-cart-grid'><div>" + document.getElementById("product-details").innerHTML + "</div><div><input type='number' onChange='updateTotal(event, this.value)' onInput='updateTotal(event, this.value)' id='quantity-" + currentProduct + "'style='width: 60px; margin: 50px 0px 0px 80px' value=" + productQuantity + "></div><div style='width: 60px; margin: 50px 0px 0px 80px' id='subtotal-" + currentProduct + "'>" + subtotal +"</div></div><br />"
+                            document.getElementById("shopping-cart").innerHTML += "<div class='shopping-cart-grid'><div>" + document.getElementById("product-details").innerHTML + "</div><div><input type='number' min='0' onChange='updateTotal(event, this.value)' onInput='updateTotal(event, this.value)' id='quantity-" + currentProduct + "'style='width: 60px; margin: 50px 0px 0px 80px' value=" + productQuantity + "></div><div style='width: 60px; margin: 50px 0px 0px 80px' id='subtotal-" + currentProduct + "'>" + subtotal +"</div></div><br />"
                             // push current product to shopping cart
                             totalCart.push({ [currentProduct] : productQuantity})
                         } else { // if it's in cart before
@@ -231,8 +232,8 @@
                            // find current product and replace the object in  shopping cart
                             for(let i=0; i < totalCart.length; i++){
                                 let key = Object.keys(totalCart[i])[0]
-                                if(key == currentProduct){
-                                    totalCart[i][currentProduct] = parseInt(val);
+                                if(key == currentId[1]){
+                                    totalCart[i][currentId[1]] = parseInt(val);
                                 }
                             }
                         }
@@ -247,10 +248,11 @@
                     }
                     
                 }
-
+                
+                // checkout
                 function checkout(){
-                    let xhttp = new XMLHttpRequest();
                     console.log("totalCart", totalCart)
+                    let xhttp = new XMLHttpRequest();
                     // if there is nothing in cart
                     if (totalCart.length == 0){
                       alert("There is nothing in shopping cart!")
@@ -258,19 +260,17 @@
                       let xhttp = new XMLHttpRequest();
                       xhttp.onreadystatechange = function() {
                         if (xhttp.readyState == 4 && xhttp.status == 200) {
-                            console.log(xhttp.responseText)
-                            // console.log(JSON.parse(xhttp.responseText))
-                            // let result = JSON.parse(xhttp.responseText);
-                            // for (const [key, value] of Object.entries(result)) {
-                            //   console.log(`${key}: ${value}`);
-                            //   // alert user if ran out of stock
-                            //   if(!value){
-                            //       alert(`item with ID ${key} is not in stock!`)
-                            //       return false;
-                            //   }
-                            // }
+                            let result = JSON.parse(xhttp.responseText);
+                            for (const [key, value] of Object.entries(result)) {
+                              console.log(`${key}: ${value}`);
+                              // alert user if ran out of stock
+                              if(!value){
+                                  alert(`item with ID ${key} is not in stock!`)
+                                  return false;
+                              }
+                            }
                             // there is stocks: direct to checkout.html
-                            // location.href = "checkout.html";
+                            document.getElementById('checkout').innerHTML = "<br /><iframe id='checkout-form' src='checkout.html' style='width:600px; height:800px;'></iframe>";
                         }
                     }
                       xhttp.open("POST", "checkProduct.php");

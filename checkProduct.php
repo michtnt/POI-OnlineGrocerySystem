@@ -1,31 +1,28 @@
 <?php
  //create a connection to the database 
 $connection = mysqli_connect('localhost', 'uts', 'internet', 'assignment1');
-$data = file_get_contents( "php://input" ); //$data is now the string '[1,2,3]';
-
+// get JSON.stringify data from js
+$data = file_get_contents( "php://input" );
+// decode the JSON
 $object = json_decode($data, true);
+$result_array = array();
+
+// itereate on the data
 for($x=0; $x<= sizeof($object);$x++){
-    foreach ($object[$x] as $key => $value) {
-        echo "{$key} => {$value} ";
-        print_r($arr);
+    foreach ($object[$x] as $key => $value) { // key is product id, and value is quantity bought
+        // echo "{$key} => {$value} ";
+        // validate if the quantity bought doesnt surpass the in_stock 
+        $query_string = "select * from products where product_id = ".$key." and in_stock > ".$value;
+        $result = mysqli_query($connection, $query_string);
+        $num_rows = mysqli_num_rows($result);
+        if($num_rows == 0){ // if not in stock label as false 
+            $result_array[$key] = false;
+        } else { // if in stock label as true
+            $result_array[$key] = true;
+        }
     }
 }
-
-// $result_array = array();
-// // validate to stock
-// for ($x = 0; $x < sizeof($data); $x++) {
-//     // TODO validate against total item bought not 0
-//   $query_string = "select * from products where product_id = ".$data[$x]." and in_stock > 0";
-//   $result = mysqli_query($connection, $query_string);
-//   $num_rows = mysqli_num_rows($result);
-//   if($num_rows == 0){ // no good: send alert 
-//       $result_array[$data[$x]] = false;
-//   } else {
-//       $result_array[$data[$x]] = true;
-//   }
-// }
-
-// //close the connection
-// mysqli_close($connection);
-// echo json_encode($result_array);
+//close the connection
+mysqli_close($connection);
+echo json_encode($result_array);
 ?>
