@@ -1,7 +1,7 @@
 <?php
 
 //create a connection to the database 
-$connection = mysqli_connect('localhost', 'uts', 'internet', 'assignment1');
+$connection = mysqli_connect('aa8ztw4n1fj778.c3tev0rhcmii.us-east-1.rds.amazonaws.com', 'uts', 'internet', 'assignment1');
 // get specific product based on the code
 $query_string = "select * from products where product_id = ".$_GET["code"];
 //run the query and assign the return values to $result

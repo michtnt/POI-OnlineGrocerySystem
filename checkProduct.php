@@ -1,6 +1,6 @@
 <?php
  //create a connection to the database 
-$connection = mysqli_connect('localhost', 'uts', 'internet', 'assignment1');
+$connection = mysqli_connect('aa8ztw4n1fj778.c3tev0rhcmii.us-east-1.rds.amazonaws.com', 'uts', 'internet', 'assignment1');
 // get JSON.stringify data from js
 $data = file_get_contents( "php://input" );
 // decode the JSON
