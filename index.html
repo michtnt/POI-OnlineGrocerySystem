@@ -228,6 +228,8 @@
                         while(t && !t.id) t = t.parentNode;
                         if(t) {
                           let currentId = t.id.split("-")
+                           // https://www.reddit.com/r/javascript/comments/180g2a/innerhtml_not_being_updated_after_changing_value/
+                          document.getElementById(`quantity-${currentId[1]}`).setAttribute('value', val)
                           document.getElementById(`subtotal-${currentId[1]}`).innerHTML = (val * parseFloat(document.getElementById(`product-unit-price-${currentId[1]}`).innerHTML)).toFixed(2);
                            // find current product and replace the object in  shopping cart
                             for(let i=0; i < totalCart.length; i++){
