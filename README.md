@@ -16,20 +16,24 @@ Happy coding!
 ## Run
 `php -S 0.0.0.0:8080`
 
-## TODO
-*[x] validate against total item bought not 0
-*[x] better css
-*[x] fix minor bugs
-*[x] update subtotal and total when quantity change
-*[x] fix bug adding products 2x
-*[x] fix checkproduct.php transforming js objects to php objects throw error
-*[x] Checkout
-*[x] deploy beanstalk
-*[x] add comments (getProduct.php[checked], checkProduct.php [checked], index.css[checked], checkout.html [checked], index.html [checked])
-*[x] recheck code (getProduct.php[checked], checkProduct.php [checked], index.css[checked], checkout.html [checked], index.html [checked])
-compare to marking criteria
-should checkout.html redirect?
-final testing
+## Todo
+- [x] validate against total item bought not 0
+- [x] better css
+- [x] fix minor bugs
+- [x] update subtotal and total when quantity change
+- [x] fix bug adding products 2x
+- [x] fix checkproduct.php transforming js objects to php objects throw error
+- [x] Checkout
+- [x] deploy beanstalk
+- [x] add comments (getProduct.php[checked], checkProduct.php [checked], index.css[checked], checkout.html [checked], index.html [checked])
+- [x] recheck code (getProduct.php[checked], checkProduct.php [checked], index.css[checked], checkout.html [checked], index.html [checked])
+- [x] compare to marking criteria
+- [x] Rough testing
+- Check Sample, Adjust if necessary
+- should checkout.html redirect?
+- Deploy Beantalk
+- Final testing
+- Submit
 
 ## Docs
-Check Assignment Submission.pdf, Assignment1 - Autumn2021-2.pdf
+Check Assignment Submission.pdf, Assignment1 - Autumn2021-2.pdf, Ass1groceriesmarkingcriteria2021.pdf

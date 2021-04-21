@@ -3,7 +3,8 @@
         "@saveall": true
     },
     "extensions": {
-        "@aws.profile": "profile:default"
+        "@aws.profile": "profile:default",
+        "@git.enableSmartCommit": true
     },
     "instance": {
         "@automaticShutdown": "30"
