@@ -83,6 +83,8 @@ function clearAllCart(){
     document.getElementById("total-num").innerHTML = "";
     // reinitialise array to empty
     totalCart = [];
+    // reload page
+    window.location.reload();
 }
 
 // update subtotal and total when quantity change in shopping cart to make it dynamic

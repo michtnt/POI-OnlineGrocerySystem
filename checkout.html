@@ -218,6 +218,8 @@ span.price {
           let email = document.getElementById("email").value
           if(regex.test(email)){
             alert("Purchase is Successful!")
+            // reload page
+            window.location.reload();
           } else{
             alert("Invalid email!")
           }
