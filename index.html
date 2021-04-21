@@ -190,9 +190,8 @@
                 }
                 
                 // add product to shopping cart
-                // TODO
                 function addCart(){
-                    const productQuantity = document.getElementById(`quantity`).value; // get the quantity user adds
+                    const productQuantity = document.getElementById(`quantity`).value; // get the quantity of the current product user adds
                     const validQuantity = validateQuantity(productQuantity) // validate if the quantity is valid
                     // calculate subtotal of the current product
                     let subtotal = parseFloat((parseInt(productQuantity) * parseFloat(document.getElementById(`product-unit-price-${currentProduct}`).innerHTML)).toFixed(2));
@@ -212,12 +211,13 @@
                             // https://www.reddit.com/r/javascript/comments/180g2a/innerhtml_not_being_updated_after_changing_value/
                             document.getElementById(`quantity-${currentProduct}`).value = parseInt(document.getElementById(`quantity-${currentProduct}`).value) + parseInt(productQuantity)
                             document.getElementById(`quantity-${currentProduct}`).setAttribute('value', document.getElementById(`quantity-${currentProduct}`).value)
-                            // replace old subtotal
+                            // replace old subtotal (old subtotal + new subtotal)
                             document.getElementById(`subtotal-${currentProduct}`).innerHTML = ((parseInt(prevQuantity) * parseFloat(document.getElementById(`product-unit-price-${currentProduct}`).innerHTML)) + parseFloat(subtotal)).toFixed(2);
                             // find current product and replace the object in  shopping cart
                             for(let i=0; i < totalCart.length; i++){
                                 let key = Object.keys(totalCart[i])[0]
-                                if(key == currentProduct){
+                                if(key == currentProduct){ // if current product code same with the array
+                                    // replace the old quantity e.g {2001 : 5}
                                     totalCart[i][currentProduct] = parseInt(document.getElementById(`quantity-${currentProduct}`).value)
                                 }
                             }
