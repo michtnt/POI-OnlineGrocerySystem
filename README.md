@@ -32,8 +32,6 @@ Happy coding!
 - [x] Deploy Beanstalk
 - [x] Final testing
 - [x] Submit
-- Optional: save cart to session and redirect to checkout.html
-- Deploy, Final test, submit
 
 ## Docs
 Check Assignment Submission.pdf, Assignment1 - Autumn2021-2.pdf, Ass1groceriesmarkingcriteria2021.pdf
