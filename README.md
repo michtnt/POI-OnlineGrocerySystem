@@ -29,11 +29,11 @@ Happy coding!
 - [x] recheck code (getProduct.php[checked], checkProduct.php [checked], index.css[checked], checkout.html [checked], index.html [checked])
 - [x] compare to marking criteria
 - [x] Rough testing
-- Check Sample, Adjust if necessary
-- should checkout.html redirect?
-- Deploy Beantalk
-- Final testing
-- Submit
+- [x] Deploy Beanstalk
+- [x] Final testing
+- [x] Submit
+- Optional: save cart to session and redirect to checkout.html
+- Deploy, Final test, submit
 
 ## Docs
 Check Assignment Submission.pdf, Assignment1 - Autumn2021-2.pdf, Ass1groceriesmarkingcriteria2021.pdf
