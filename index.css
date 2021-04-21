@@ -19,6 +19,12 @@
   /*padding: 20px 0;*/
 }
 
+.center {
+/*border: 5px solid #FFFF00;*/
+display: flex;
+justify-content: center;
+}
+
 /*Dropdown*/
 body {
   font-family: 'Arial', monospace;

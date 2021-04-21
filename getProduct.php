@@ -1,12 +1,10 @@
 <?php
-
 //create a connection to the database 
 $connection = mysqli_connect('aa8ztw4n1fj778.c3tev0rhcmii.us-east-1.rds.amazonaws.com', 'uts', 'internet', 'assignment1');
 // get specific product based on the code
 $query_string = "select * from products where product_id = ".$_GET["code"];
 //run the query and assign the return values to $result
 $result = mysqli_query($connection, $query_string);
-
 //check the number of records returned using $num_rows
 $num_rows = mysqli_num_rows($result);
 
@@ -43,6 +41,6 @@ if ($num_rows > 0 ) {
 
 //close the connection
 mysqli_close($connection);
+// return the product details
 echo $product;
-
 ?>

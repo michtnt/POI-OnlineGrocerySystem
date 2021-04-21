@@ -3,9 +3,18 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
+        <!--Title-->
+        <div class="center">
+            <h1>Michelle's Grocery Store</h1>
+        </div>
+        
+        <!--Main Frame-->
         <div class="grid-container">
+            
+            <!--Left Hand Frame-->
             <div class="main">
                 <div class="navbar">
+                    
                     <div class="dropdown">
                         <div class="dropbtn">Frozen Food</div>
                         <!-- Main Dropdown-->
@@ -36,7 +45,9 @@
                         <!-- Main Dropdown-->
                         <div class="dropdown-one">
                             <div id="link1" class="dItem" onclick="getProduct(3002)">T'Bone Steak</div>
-                            <div id="link1" class="dItem">Cheddar Cheese
+                            <div id="link1" class="dItem">
+                                Cheddar Cheese
+                                <!--Inside Dropdown-->
                                 <div class="dropdown-two">
                                      <div class="dItem" id="file" onclick="getProduct(3000)">500 gram</div>
                                      <div class="dItem" id="file" onclick="getProduct(3001)">1000 gram</div>
@@ -54,13 +65,17 @@
                         <div class="dropbtn">Beverages</div>
                         <!-- Main Dropdown-->
                         <div class="dropdown-one">
-                            <div id="link1" class="dItem">Coffee
+                            <div id="link1" class="dItem">
+                                Coffee
+                                <!--Inside Dropdown-->
                                 <div class="dropdown-two">
                                      <div class="dItem" id="file" onclick="getProduct(4003)">200 gram</div>
                                      <div class="dItem" id="file" onclick="getProduct(4004)">500 gram</div>
                                 </div>
                             </div>
-                            <div id="link1" class="dItem">Earl Grey Tea Bags
+                            <div id="link1" class="dItem">
+                                Earl Grey Tea Bags
+                                <!--Inside Dropdown-->
                                 <div class="dropdown-two">
                                      <div class="dItem" id="file" onclick="getProduct(4000)">Pack 25</div>
                                      <div class="dItem" id="file" onclick="getProduct(4001)">Pack 100</div>
@@ -76,14 +91,18 @@
                         <!-- Main Dropdown-->
                         <div class="dropdown-one">
                             <div id="link1" class="dItem" onclick="getProduct(2002)">Bath Soap</div>
-                            <div id="link1" class="dItem">Panadol
+                            <div id="link1" class="dItem">
+                                Panadol
+                                <!--Inside Dropdown-->
                                 <div class="dropdown-two">
                                      <div class="dItem" id="file" onclick="getProduct(2000)">Pack 24</div>
                                      <div class="dItem" id="file" onclick="getProduct(2001)">Bottle 50</div>
                                 </div>
                             </div>
                             <div id="link1" class="dItem" onclick="getProduct(2005)">Washing Powder</div>
-                            <div id="link1" class="dItem">Garbage Bags
+                            <div id="link1" class="dItem">
+                                Garbage Bags
+                                <!--Inside Dropdown-->
                                 <div class="dropdown-two" style="top: 80px;">
                                      <div class="dItem" id="file" onclick="getProduct(2003)">Small (10 Pack)</div>
                                      <div class="dItem" id="file" onclick="getProduct(2004)">Large (50 Pack)</div>
@@ -99,7 +118,9 @@
                         <div class="dropdown-one">
                             <div id="link1" class="dItem" onclick="getProduct(5002)">Bird Food</div>
                             <div id="link1" class="dItem" onclick="getProduct(5003)">Cat Food</div>
-                            <div id="link1" class="dItem">Dry Dog Food
+                            <div id="link1" class="dItem">
+                                Dry Dog Food
+                                <!--Inside Dropdown-->
                                 <div class="dropdown-two" style="top: 80px;">
                                      <div class="dItem" id="file" onclick="getProduct(5000)">1 kg pack</div>
                                      <div class="dItem" id="file" onclick="getProduct(5001)">5 kg pack</div>
@@ -111,9 +132,11 @@
                 </div>
             </div>
             
+            <!--Top Right Frame-->
             <div class="top-right">
                <h2>Product Details</h2>
                <div id="product-details-notice" style="font-style:italic">Please click a product to add the product to the cart.</div>
+               <!--Display product details, the quantity and add button-->
                <div class="product-details-grid">
                     <div id="product-details"></div>
                     <div id="product-quantity" class="product-details-space"></div>
@@ -121,24 +144,29 @@
                </div>
             </div>
             
+            <!--Bottom Right Frame-->
             <div class="bottom-right">
                 <h2>Shopping Cart</h2>
+                <!--Show products in the shopping cart-->
                 <div class="shopping-cart-grid">
                     <div id="shopping-cart" class="shopping-cart"></div>
                 </div>
+                <!--Show total cost of shopping cart-->
                 <div id="total-cost">
                     <div id="total-text"></div>
                     <div id="total-num"></div>
                     <br />
                 </div>
+                <!--Clear all carts and checkout-->
                 <button onClick="clearAllCart()">Clear All</button>
                 <button onCLick="checkout()">Checkout</button>
                 <div id="shopping"></div>
                 <div id="checkout"></div>
             </div>
             <script>
-                var currentProduct;
-                var totalCart = [];
+                // functionality
+                var currentProduct; // product code (String):  keep track on the current product that is added to cart
+                var totalCart = []; // product list (Array): keep track on all products in cart
                 
                 // get product with a specific code
                 function getProduct(code){
@@ -150,36 +178,39 @@
                 	 	document.getElementById("product-details").innerHTML = xhttp.responseText
                 	 	// remove prompt
                 	 	document.getElementById("product-details-notice").innerHTML = ""
-                	 	// allow user to add product's quantity
+                	 	// allow user to modify product's quantity
                 	 	document.getElementById("product-quantity").innerHTML = "<input type='number' id='quantity' style='width: 60px;' min='0'>"
                 	 	// allow user to add products to shopping cart
                 	 	document.getElementById("add-button").innerHTML = "<button onclick='addCart()'>Add</button>"
                     }
                   };
+                  // call php code to get a specific product with the product code given
                   xhttp.open("GET", "getProduct.php?code=" + code, true);
                   xhttp.send();
                 }
                 
                 // add product to shopping cart
+                // TODO
                 function addCart(){
-                    const productQuantity = document.getElementById(`quantity`).value;
-                    const validQuantity = validateQuantity(productQuantity)
-                    // calculate subtotal
+                    const productQuantity = document.getElementById(`quantity`).value; // get the quantity user adds
+                    const validQuantity = validateQuantity(productQuantity) // validate if the quantity is valid
+                    // calculate subtotal of the current product
                     let subtotal = parseFloat((parseInt(productQuantity) * parseFloat(document.getElementById(`product-unit-price-${currentProduct}`).innerHTML)).toFixed(2));
                     if(validQuantity){
-                        // if it's never in the cart before
+                        // check if it is previously in the cart
                         const inCart = totalCart.some(obj => obj.hasOwnProperty(currentProduct))
-                        if(!inCart){
+                        if(!inCart){ // if it's never in the cart before
                             // put product details to shopping cart
                             // allow user to edit product's quantity
                             document.getElementById("shopping-cart").innerHTML += "<div class='shopping-cart-grid'><div>" + document.getElementById("product-details").innerHTML + "</div><div><input type='number' min='0' onChange='updateTotal(event, this.value)' onInput='updateTotal(event, this.value)' id='quantity-" + currentProduct + "'style='width: 60px; margin: 50px 0px 0px 80px' value=" + productQuantity + "></div><div style='width: 60px; margin: 50px 0px 0px 80px' id='subtotal-" + currentProduct + "'>" + subtotal +"</div></div><br />"
                             // push current product to shopping cart
                             totalCart.push({ [currentProduct] : productQuantity})
                         } else { // if it's in cart before
-                            // add the value
+                            // add the value from previous quantity
                             let prevQuantity = document.getElementById(`quantity-${currentProduct}`).value
-                            document.getElementById(`quantity-${currentProduct}`).value = parseInt(document.getElementById(`quantity-${currentProduct}`).value) + parseInt(productQuantity)
+                            // replace old quantity value to new one
                             // https://www.reddit.com/r/javascript/comments/180g2a/innerhtml_not_being_updated_after_changing_value/
+                            document.getElementById(`quantity-${currentProduct}`).value = parseInt(document.getElementById(`quantity-${currentProduct}`).value) + parseInt(productQuantity)
                             document.getElementById(`quantity-${currentProduct}`).setAttribute('value', document.getElementById(`quantity-${currentProduct}`).value)
                             // replace old subtotal
                             document.getElementById(`subtotal-${currentProduct}`).innerHTML = ((parseInt(prevQuantity) * parseFloat(document.getElementById(`product-unit-price-${currentProduct}`).innerHTML)) + parseFloat(subtotal)).toFixed(2);
@@ -202,7 +233,7 @@
                 
                 // validate product quantity
                 function validateQuantity(q){
-                    // if less than 0 and more than 20 and decimal: not valid
+                    // if <= 0 and > 20 and decimal: not valid
                     if(q <= 0 || q > 20 || q % 1 != 0){
                         return false;
                     }
@@ -211,54 +242,61 @@
                 
                 // clear all products in cart
                 function clearAllCart(){
+                    // clear shopping carts
                     document.getElementById("shopping-cart").innerHTML = "";
+                    // clear total cost of all products
                     document.getElementById("total-text").innerHTML = "";
                     document.getElementById("total-num").innerHTML = "";
+                    // reinitialise array to empty
                     totalCart = [];
                 }
                 
-                // update subtotal and total when quantity change
+                // update subtotal and total when quantity change in shopping cart to make it dynamic
                 function updateTotal(e, val){
-                    if(!validateQuantity(val)){
+                    if(!validateQuantity(val)){ // not valid quantity
                         alert("Please insert valid product quantity")
-                    } else {
+                    } else { //valid
                         // get the id name
                         var t = e.target;
                         // some browsers consider text nodes to be a target
                         while(t && !t.id) t = t.parentNode;
                         if(t) {
+                          // only get the code of the specific product
+                          // currentId[1] : product code
                           let currentId = t.id.split("-")
                            // https://www.reddit.com/r/javascript/comments/180g2a/innerhtml_not_being_updated_after_changing_value/
-                          document.getElementById(`quantity-${currentId[1]}`).setAttribute('value', val)
-                          document.getElementById(`subtotal-${currentId[1]}`).innerHTML = (val * parseFloat(document.getElementById(`product-unit-price-${currentId[1]}`).innerHTML)).toFixed(2);
-                           // find current product and replace the object in  shopping cart
+                           // replace the old quantity to the new value
+                           document.getElementById(`quantity-${currentId[1]}`).setAttribute('value', val)
+                           // recalculate subtotal (new quantity * price of current product)
+                           document.getElementById(`subtotal-${currentId[1]}`).innerHTML = (val * parseFloat(document.getElementById(`product-unit-price-${currentId[1]}`).innerHTML)).toFixed(2);
+                           // find current product and replace the old quantity to new ones in shopping cart array
                             for(let i=0; i < totalCart.length; i++){
                                 let key = Object.keys(totalCart[i])[0]
-                                if(key == currentId[1]){
+                                if(key == currentId[1]){ // if current product code same with the array
+                                    // replace the old quantity e.g {2001 : 5}
                                     totalCart[i][currentId[1]] = parseInt(val);
                                 }
                             }
                         }
-                        
+                        // recalculate the total cost of all products
                         let total = 0;
                         for(let i=0; i < totalCart.length; i++){
                             let key = Object.keys(totalCart[i])[0]
                             total += parseFloat(document.getElementById(`subtotal-${key}`).innerHTML)
                         }
-                        
+                        // update total cost of all products
                         document.getElementById("total-num").innerHTML = (total).toFixed(2)
                     }
-                    
                 }
                 
                 // checkout
                 function checkout(){
                     console.log("totalCart", totalCart)
                     let xhttp = new XMLHttpRequest();
-                    // if there is nothing in cart
+                    // not valid: if there is nothing in cart
                     if (totalCart.length == 0){
                       alert("There is nothing in shopping cart!")
-                    } else {
+                    } else { // valid: > 0 items in cart
                       let xhttp = new XMLHttpRequest();
                       xhttp.onreadystatechange = function() {
                         if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -271,12 +309,14 @@
                                   return false;
                               }
                             }
-                            // there is stocks: direct to checkout.html
+                            // there is stock: direct to checkout.html
                             document.getElementById('checkout').innerHTML = "<br /><iframe id='checkout-form' src='checkout.html' style='width:600px; height:800px;'></iframe>";
                         }
-                    }
+                      }
+                      // check if the products in shopping cart are in stock
                       xhttp.open("POST", "checkProduct.php");
                       xhttp.setRequestHeader( "Content-Type", "application/json" );
+                      // send the { product code : quantity } objects to PHP server
                       xhttp.send(JSON.stringify(totalCart)); 
                   };
                 }
